@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 red lighten-3"> <h1>Inspection of the book</h1> </div>
+    <div class="col s12 red lighten-3"> <h4>Title: <%= @book.title %></h4> </div>
+    <div class="col s12 red lighten-3"> <h4>Price: <%= @book.price %></h4> </div>
+    <div class="col s12 red lighten-3">
+      <h4>Autohrs: </br>
+        <% if @book.authors.present? %>            
+  	      <% @authors = @book.authors %>
+          <% @authors.each do |author| %>
+            <%= author.full_name %> </br>
+          <% end %> 
+        <% end %>
+      </h4>
+	</div>
+  </div>
+</div>

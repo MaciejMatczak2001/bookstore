@@ -1,0 +1,32 @@
+<nav>
+  <div class="nav-wrapper">
+    <%= link_to "Logo", root_path, class: "brand-logo" %>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if logged_in? && current_user.admin? %>
+        <li> <%=link_to "Users", "/users"%> </li>
+        <li> <%=link_to "Authors", "/authors"%> </li>
+      <% end %>
+      <% if logged_in? %> 
+        <li><%= link_to "Sign out", "/logout" %> </li>
+        <li><%= link_to "My Cart", "/my_cart" %> </li>
+      <% else %>
+        <li> <%= link_to "Sign Up", "/sign_up" %> </li>
+        <li> <%= link_to "Log In", "/login" %> </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+<% if notice %>
+<div class="alert card green white-text">
+  <div class="card-content">
+    <p><i class="material-icons"></i><%= notice %></p>
+  </div>
+</div>
+<% end %>
+<% if alert %>
+<div class="alert card red white-text">
+  <div class="card-content">
+    <p><i class="material-icons"></i><%= alert %></p>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  bookstore:
+    build:
+      context: .
+    ports:
+      - 18210:3000
+    volumes:
+      - ./:/app:delegated
+      - bundle_volume:/usr/local/bundle
+    env_file:
+      - docker/.env
+  webpack_dev_server:
+    image: bookstore-bookstore
+    volumes:
+      - ./:/app:delegated
+      - bundle_volume:/usr/local/bundle
+    env_file:
+      - docker/.env
+    entrypoint: ["/webpack_entrypoint.sh"]
+    command: ["./bin/webpack-dev-server"]
+
+volumes:
+  bundle_volume:

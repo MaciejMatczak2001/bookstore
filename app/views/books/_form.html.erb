@@ -1,0 +1,23 @@
+<%= form_with model: @book do |form| %>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          Title: <br>
+          <%= text_field_tag :title, @book.title%>
+        </div>
+        <div class="input-field col s12">
+          Price: <br>
+          <%= text_field_tag :price, @book.price %> 
+        </div>
+        <div class="input-field col s12">
+       	  Published?: <br>
+          <%= text_field_tag :published, @book.published %> 
+        </div>
+      </div>
+      <div class="row">
+        <%= form.submit class: "btn waves-effect waves-light" %>
+      </div>    
+    </form>
+  </div>
+<% end %>

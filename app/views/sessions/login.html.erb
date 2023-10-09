@@ -1,0 +1,20 @@
+<h1>Log In</h1>
+<%= form_with url: 'login' do |form|%>
+  <div class="row">
+    <form class="col s12">
+	  <div class="row">
+	    <div class="input-field col s12">
+	      Email: <br>
+	      <%= text_field_tag :email %> 
+	    </div>
+	    <div class="input-field col s12">
+	      Password: <br>
+	      <%= password_field_tag :password %>		
+	    </div>
+	  </div>
+      <div class="row">
+        <%= form.submit class: "btn waves-effect waves-light"%>
+      </div>    
+    </form>
+  </div>
+<% end %>

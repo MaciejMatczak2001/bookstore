@@ -1,0 +1,49 @@
+<h1 class = "center-align"> My Cart </h1>
+<% if @cart.cart_items.present? %>
+  <div class="container">
+    <table class="centered striped" style="border: 1px solid #000;">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th></th>
+          <th>Quantity</th>
+          <th></th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart.cart_items.each do |cart_item| %>
+          <% book = cart_item.book %>
+          <% authors = book.authors %>
+          <tr>
+            <td> <%= book.title %> </td>
+            <td>
+              <% authors.each do |author| %>
+                <%= author.full_name %> </br>
+              <% end %>
+            </td>
+            <td> 
+              <%= button_to remove_one_cart_path(cart_item) do%>
+                <i class="material-icons">exposure_neg_1</i> 
+              <% end %>
+            </td>
+            <td> <%= cart_item.quantity %> </td>
+            <td>
+              <%= button_to add_cart_path(book) do%>
+                <i class="material-icons">exposure_plus_1</i> 
+              <% end %>
+            </td>
+            <td> <%= "#{cart_item.quantity} * #{book.price} = #{cart_item.quantity * book.price}" %> </td>
+            <td> <%= button_to "Clear this position", remove_item_cart_path(cart_item), class: "waves-effect waves-light btn-small" %> </td>
+          </tr>
+        <% end %>
+        <tr style="border: 1px solid #000;"> <td> Total: <%= @cart.sum_all %> </td> </tr>
+      </tbody>
+    </table> </br>
+    <%= button_to "Clear Cart", @cart, method: :delete, class: "waves-effect waves-light btn-small"%>
+    </div>
+<% else %>
+  <h1> Empty :C </h1>
+<% end %>

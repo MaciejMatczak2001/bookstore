@@ -1,0 +1,21 @@
+<h1 class = "center-align">Authors</h1>
+<div class="container">
+  <table class="centered striped" style="border: 1px solid #000;">
+    <thead>
+      <tr>
+        <th>Authors</th>
+      </tr>
+    </thead>
+      <tbody>
+      <% @authors.each do |author| %>
+        <tr>  
+          <td><%= author.first_name %></td>
+          <td><%= author.last_name %></td>
+          <td><%= button_to "Delete", author, method: :delete, class: "waves-effect waves-light btn-small"%></td>
+          <td><%= link_to "Edit", edit_author_path(author), class: "waves-effect waves-light btn-small"%></td>
+        </tr>
+      <% end %>
+      </tbody>
+  </table>
+</br>
+</div>

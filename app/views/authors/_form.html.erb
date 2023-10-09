@@ -1,0 +1,19 @@
+<%= form_with model: @author do |form| %>
+  <div class="row">
+    <form class="col s12">
+	  <div class="row">
+	    <div class="input-field col s12">
+	      First Name: <br>
+	      <%= text_field_tag :first_name, @author.first_name%>
+	    </div>
+	    <div class="input-field col s12">
+	      Last Name: <br>
+	      <%= text_field_tag :last_name, @author.last_name %> 
+	    </div>
+	  </div>
+	  <div class="row">
+	    <%= form.submit class: "btn waves-effect waves-light" %>
+	  </div>    
+	</form>
+  </div>
+<% end %>

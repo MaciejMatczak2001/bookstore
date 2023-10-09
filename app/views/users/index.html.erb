@@ -1,0 +1,26 @@
+<h1 class = "center-align">Users</h1>
+<div class="container">
+  <table class="centered striped" style="border: 1px solid #000;">
+    <thead>
+      <tr>
+        <th>Users</th>
+      </tr>
+    </thead>
+      <tbody>
+      <% @users.each do |user| %>
+        <tr>  
+          <td><%= user.email %></td>
+          <td><%= button_to "Delete", user, method: :delete, class: "waves-effect waves-light btn-small"%></td>
+            <td>
+              <% if user.blocked? %>
+                <%= button_to "Unblock", unblock_user_path(user), class: "waves-effect waves-light btn-small"%>
+              <%else%>
+                <%= button_to "Block", block_user_path(user), class: "waves-effect waves-light btn-small"%>
+              <% end %>
+            </td>
+        </tr>
+      <% end %>
+      </tbody>
+  </table>
+</br>
+</div>

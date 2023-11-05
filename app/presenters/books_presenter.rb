@@ -6,6 +6,6 @@ class BooksPresenter < SimpleDelegator
   end
 
   def authors
-    super.map { |author| "#{author.first_name} #{author.last_name}" }.join(', ')
+    super.map { |author| "#{author.full_name}" }.join(', ')
   end
 end

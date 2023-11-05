@@ -1,7 +1,9 @@
 class AuthorsController < ApplicationController
   include Available
-	before_action :admin_content
+  before_action :admin_content
   before_action :set_author, only: %i[edit update destroy]
+
+	skip_before_action :verify_authenticity_token
 
 	def index
 		@authors = Author.all
@@ -26,7 +28,7 @@ class AuthorsController < ApplicationController
   private
 
   def author_params
-    params.permit(:first_name, :last_name)
+    params.require(:author).permit(:first_name, :last_name)
   end
 
   def set_author

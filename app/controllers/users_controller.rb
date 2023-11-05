@@ -3,8 +3,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[block destroy unblock]
   before_action :admin_content, only: %i[index destroy block unblock]
 
-  skip_before_action :verify_authenticity_token
-
   def index
     @users = User.all
   end

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :carts do
     member do
-      post :remove_one
+      post :remove_one_book
     end
   end
 

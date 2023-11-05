@@ -12,21 +12,17 @@ class CartsController < ApplicationController
     book = Book.find(params[:id])
     
     if book.quantity == 0
-      redirect_back(fallback_location: root_path, alert: "Book is out of stock!")
+      redirect_back(fallback_location: root_path, alert: "Book is out of stock!") and return
+    end
+  
+    cart_item = @cart.cart_items.find_by(book: book)
+  
+    if cart_item
+      cart_item.increment!(:quantity)
+      redirect_back(fallback_location: root_path)
     else
-      cart_item = @cart.cart_items.find_by(book: book)
-  
-      if cart_item
-        cart_item.increment!(:quantity)
-      else
-        cart_item = @cart.cart_items.create(book: book, quantity: 1)
-      end
-  
-      if cart_item.save
-        redirect_back(fallback_location: root_path, notice: "Book added")
-      else
-        redirect_to root_path, alert: "Error"
-      end
+      cart_item = @cart.cart_items.create(book: book, quantity: 1)
+      redirect_back(fallback_location: root_path, notice: "Book added to cart")
     end
   end
 
@@ -35,8 +31,8 @@ class CartsController < ApplicationController
     redirect_to my_cart_path, notice: "Cart cleared"
   end
 
-  #reduces the quantity of an item in the shopping cart if quantity reaches 0 it removes it
-  def remove_one
+  # reduces the quantity of an item in the shopping cart if quantity reaches 0 it removes it
+  def remove_one_book
     cart_item = CartItem.find(params[:id])
 
     if cart_item.quantity > 1
@@ -47,11 +43,9 @@ class CartsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  #removes cart item from the cart
+  # removes cart item from the cart
   def remove_item
-    cart_item = CartItem.find(params[:id])
-
-    cart_item.destroy
+    @cart.cart_items.find(params[:id]).destroy
 
     redirect_back(fallback_location: root_path)
   end
@@ -59,11 +53,7 @@ class CartsController < ApplicationController
   private
 
   def set_cart
-    if current_user.cart == nil
-      @cart = Cart.create(user_id: current_user.id)
-    else
-      @cart = current_user.cart
-    end
+    @cart = current_user.cart || current_user.create_cart
   end
   
 end

@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
-  include Available
+  include Authorizable
   before_action :set_book, only: %i[show edit update destroy author]
-  before_action :admin_content, only: %i[destroy edit update]
+  before_action :check_admin_privilages, only: %i[destroy edit update]
 
   def index
     @books = Book.all

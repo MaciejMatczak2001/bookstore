@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  include Available
+  include Authorizable
   before_action :set_user, only: %i[block destroy unblock]
-  before_action :admin_content, only: %i[index destroy block unblock]
+  before_action :check_admin_privilages, only: %i[index destroy block unblock]
 
   def index
     @users = User.all

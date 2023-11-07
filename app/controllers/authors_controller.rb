@@ -1,6 +1,6 @@
 class AuthorsController < ApplicationController
-  include Available
-  before_action :admin_content
+  include Authorizable
+  before_action :check_admin_privilages
   before_action :set_author, only: %i[edit update destroy]
 
 	skip_before_action :verify_authenticity_token

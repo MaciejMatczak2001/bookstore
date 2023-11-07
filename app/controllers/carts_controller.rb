@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
-  include Available
+  include Authorizable
   
-  before_action :logged_in_content
+  before_action :check_if_logged_in
   before_action :set_cart
 
 

@@ -18,12 +18,12 @@ module Authorizable
   # returns current user if he is logged in
   def current_user
     return unless logged_in?
-   	@current_user ||= User.find_by(id: session[:user_id])
+    @current_user ||= User.find_by(id: session[:user_id])
   end
 
   # checks if user is logged in
   def logged_in?
-   	session.present?
+    session.present?
   end
 
 end
